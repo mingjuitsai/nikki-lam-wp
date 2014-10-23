@@ -42,9 +42,8 @@ if(is_page('OTHER')){
 
 <div id="main_wrapper">
 
-<!------------ header start ------------------>
+<!-- Header -->
 <?php get_header(); ?>
-<!------------ header finish ------------------>
 
 
 <div id="content">
