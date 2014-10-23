@@ -1,0 +1,188 @@
+@charset "UTF-8";
+/* CSS Document */
+
+
+body{
+	margin:0;
+	padding:0;
+}
+
+#outer_wrapper{
+	min-height: 100%;
+}
+
+#main_wrapper{
+	height: 100%;
+	overflow:hidden;
+	width:620px;
+	margin:16px auto auto auto;
+}
+
+
+#footer{
+	position:relative;
+	width:100%;
+	vertical-align:middle;
+	color:#CABCCA;
+	vertical-align:bottom;
+	line-height:30px;
+	height:30px;
+	font-family:AvantGarde Bk BT, Helvetica, Arial, Serif;
+}
+#footer_text{
+	position:relative;
+	width:173px;
+	letter-spacing:2px;
+	color:#DDD8D3;
+	height:7px;
+	font-size:7px;
+	margin:30px auto 0px auto;
+}
+
+/* content */
+
+#content{
+    font-family:AvantGarde Bk BT, Helvetica, Arial, Serif;
+	height:auto;
+	width:600px;
+	margin:auto;
+	position:relative;
+	/*background:#3CC;*/
+}
+
+/* exhiibtion */
+
+#ex_box{
+	margin-top:35px;
+	padding-bottom:20px;
+}
+
+
+#exhibition_period{
+	color:#999;
+	font-size:13px;
+	padding:0;
+	margin:10px 0px 15px 3px;
+	list-style:none;
+}
+
+#exhibition_period li{
+	margin:0px 10px;
+	display:inline;
+	cursor:pointer;
+}
+
+/* single exhibition */
+
+.single_exhibition{
+	color:#C90;
+	position:relative;
+	clear:both;
+	height:auto;
+	width:100%;
+	display:inline-block;
+
+	/*border:solid 1px black;*/
+}
+
+.single_exhibition a:link,.single_exhibition a:visited{
+	color:#960;
+	text-decoration:underline;
+}
+.single_exhibition a:hover{
+	color:#B59F61;
+	text-decoration:underline;
+}
+
+.exhibition_title{
+	color:#960;
+	clear:both;
+	font-size:18px;
+}
+
+.exhibition_image{
+	margin-right:14px;
+	float:left;
+	overflow:hidden;
+	width:200px;
+	border:solid 1px #FFF;
+	border-radius:10px;
+	-moz-border-radius:10px;	
+	-webkit-border-radius:10px;
+	/*background:#39F;*/
+}
+.exhibition_image img{
+	width:200px;
+	height:auto;
+}
+
+.des{
+	font-size:12px;
+	overflow:auto;
+	/*background:#FC6;*/
+}
+
+.exhibition_info{
+	width:100%;
+	margin:8px 0px 15px 0px;
+}
+
+.ex_info_div{	
+	clear:both;
+	width:100%;
+	display:inline-block;
+	margin-bottom:3px;
+}
+.ex_info_title{
+	display:inline-block;
+	color:#ADADAD;
+	font-size:14px;
+}
+.ex_info_value{
+	width:230px;
+	float:right;
+	margin-right:90px;
+	color:#AB8473;
+}
+
+.sponsor_logos{
+	font-size:10px;
+	vertical-align:middle;
+	position:relative;
+	float:right;
+	overflow:visible;
+	margin:30px 0px 10px 0px;
+	color:#614B44;
+	display:inline-block;
+}
+.sponsor_logos img{
+	margin-left:5px;
+	vertical-align:middle;
+	width:40px;
+	height:auto;
+}
+
+.fund_logos{
+	font-size:10px;
+	vertical-align:middle;
+	position:relative;
+	float:right;
+	overflow:hidden;
+	margin:40px 20px 30px 0px;
+	color:#614B44;
+	display:inline-block;
+}
+.fund_logos img{
+	border:solid 1px #FFF;
+	border-radius:5px;
+	-moz-border-radius:5px;	
+	-webkit-border-radius:5px;
+	margin-left:5px;
+	vertical-align:middle;
+	width:40px;
+	height:auto;
+}
+
+
+
+/* ------- */

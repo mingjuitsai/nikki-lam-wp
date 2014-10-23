@@ -1,0 +1,128 @@
+@charset "UTF-8";
+/*
+Theme Name: Nikki Lam 
+Author: Ray Tsai, Nikki Lam
+Version: 1.0
+Description: Custom portfolio wordpress theme for Nikki Lam 2011
+*/
+
+body{
+	margin:0;
+	overflow:scroll;
+}
+
+#outer_wrapper{
+	min-height: 100%;
+}
+
+#main_wrapper{
+	min-height: 100%;
+	overflow:hidden;
+	width:620px;
+	margin:16px auto auto auto;
+}
+
+#footer{
+	position:relative;
+	width:100%;
+	vertical-align:bottom;
+	line-height:30px;
+	height:30px;
+	font-family:AvantGarde Bk BT, Helvetica, Arial, Serif;
+}
+#footer_text{
+	position:relative;
+	width:173px;
+	letter-spacing:2px;
+	color:#DDD8D3;
+	height:7px;
+	font-size:7px;
+	margin:30px auto 0px auto;
+}
+
+/* content */
+
+#content{
+    font-family:AvantGarde Bk BT, Helvetica, Arial, Serif;
+	height:auto;
+	width:600px;
+	margin:auto;
+	position:relative;
+}
+
+#images_container{
+	position:relative;
+	overflow:hidden;
+	width:600px;
+    height:400px;
+}
+
+#slideshow_images{
+	cursor:pointer;
+}
+
+#slideshow_images div{
+	position:absolute;
+	top:0;
+	left:0;
+	width:600px;
+	height:400px;
+}
+
+#slideshow_images img{
+	position:absolute;
+	top:0;
+	left:0;
+	width:600px;
+	height:auto;
+}
+#slideshow_images iframe{
+	display:block;
+	position:absolute;
+	top:0;
+	left:0;
+	width:600px;
+	height:400px;
+}
+
+.loading{
+	background-image:url(images/preloading.gif);
+	background-position:center;
+	background-repeat:no-repeat;
+}
+
+
+/* des */
+
+#des{
+	margin:12px auto;
+	padding:0px 15px;
+	height:100px;
+	/*background:#FF9;*/
+}
+
+#des_title{
+	width:240px;
+	float:left;
+	font-family:Minion Pro, Times, San Serif;
+	font-size:23px;
+	color:#686868;
+	margin-left:18px;
+	padding:4px;
+	/*background:#C96;*/
+}
+
+#sub_des{
+	display:inline-table;
+	width:255px;
+	font-size:13px;
+	color:#777;
+	padding:10px 10px 10px 19px;
+	border-left:solid 1px #CCC;
+	font-family:AvantGarde Bk BT, Helvetica, Arial, Serif;
+	/*background:#99F;*/
+
+}
+
+
+/* ------- */
