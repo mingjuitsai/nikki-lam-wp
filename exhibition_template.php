@@ -28,15 +28,7 @@
           <div id="ex_box">
 
             <?php
-              if(is_page('CURRENT')){
-                exhibition_loop('exhibition_current'); 
-              }
-              if(is_page('PAST')){
-                exhibition_loop('exhibition_past'); 
-              }
-              if(is_page('UPCOMING')){
-                exhibition_loop('exhibition_upcoming'); 
-              }
+              exhibition_loop('exhibition'); 
             ?>
 
           </div>
