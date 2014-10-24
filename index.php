@@ -2,12 +2,11 @@
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
 
-
 <link href="<?php bloginfo(template_directory) ?>/style.css" rel="stylesheet" media="screen">
 <link rel="stylesheet" href="<?php bloginfo(template_directory) ?>/screen_header.css" type="text/css" charset="utf-8" />
 <link rel="stylesheet" href="<?php bloginfo(template_directory) ?>/minion_stylesheet.css" type="text/css" charset="utf-8" />
 <link rel="stylesheet" href="<?php bloginfo(template_directory) ?>/avant_garde_stylesheet.css" type="text/css" charset="utf-8" />
-<script src="<?php bloginfo(template_directory) ?>/js/jquery-1.6.2.min.js" type="text/javascript"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="<?php bloginfo(template_directory) ?>/js/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
 
 <title>Nikki Lam</title>
@@ -86,8 +85,13 @@
 
       /* Slide Show
       ---------------------------------------------*/
-      var slide_show_time= 8000;
-      var timer=setInterval(function(){slide_show();},slide_show_time);
+      var slide_show_time = 5000;
+      var timer = setInterval(function(){slide_show()},slide_show_time);
+      var timer2 = setInterval(function(){testing()},slide_show_time);
+
+      function testing(){
+        console.log("setinterval testing");
+      }
 
       $("#content").click(function(){
           slide_show();
@@ -95,11 +99,12 @@
       $("#content").hover(function(){
           clearInterval(timer);},
           function(){
-          timer=setInterval(function(){slide_show();},slide_show_time);
+          timer=setInterval(function(){slide_show()},slide_show_time);
       });
       var post_text_id= 0; 
       var post_image_id= 1; 
-      //insert images and prepare for slideshow
+
+      // insert images and prepare for slideshow
       for(i=0;i<post_artworks_js.length;i++){
         $(document.createElement("div"))
           .css({
@@ -110,7 +115,6 @@
           .appendTo("#slideshow_images");
       }
 
-      //alert($("#slideshow_images").html());
       $("#slideshow_images .artworks_block").addClass('loading')
         // if there's iframe change to .children("img, iframe") or whatever post element is
         .children("img")
@@ -120,43 +124,44 @@
                                    
       // hide test
       $('#slideshow_images .artworks_block:gt(0)').hide();
-      //animate
-      //$('#slideshow_images .loading_block:gt(0)').animate({opacity:0},0);
-      //$('#slideshow_images .disabled_block:gt(0)').css({display:'block'});
 
+      /*
+        Slide Show function 
+      */
       function slide_show(){
-        
+
+        console.log( "sldieshow call" );
+        // if there's only one post, do not play loop animation 
+        if(post_artworks_js.length==1){
+          return;
+        }
+
+        // set variables 
         var fade_out_speed=310;
         var fade_in_speed=300;
         var opacity_out=0.8;
         var opacity_in=1;
         
-        // if there's only one post, do not play loop animation 
-        if(post_artworks_js.length==1){
-          return;
-        }
-        
-        /*animate and loop titles*/
+        /* animate and loop titles */
         $("#des_title").animate({opacity:opacity_out},fade_out_speed,function(){
           $("#des_title").html(post_titles_js[post_text_id]);
           $("#des_title").animate({opacity:opacity_in},fade_in_speed);
         });
-        /*animate and loop contents*/
+        /* animate and loop contents */
         $("#sub_des").animate({opacity:opacity_out},fade_out_speed,function(){
           $("#sub_des").html(post_contents_js[post_text_id]);
           $("#sub_des").animate({opacity:opacity_in},fade_in_speed);
         });
-        /* animate and loop img*/   
+        /* animate and loop img */   
         $("#slideshow_images .artworks_block:first").fadeOut(900).next('.artworks_block').fadeIn(500).end().appendTo("#slideshow_images");
 
-          console.log(post_text_id);
-        if(post_text_id+1==post_titles_js.length){
-          post_text_id=0;
-          console.log(post_text_id);
-        }else{ 
+        console.log("first: " + post_text_id + " - " + post_titles_js.length );
+        if( post_text_id+1 == post_titles_js.length ){
+          post_text_id = 0;
+          console.log( post_text_id + " - " + post_titles_js.length );
+        } else { 
           post_text_id++;
         }
-
       }
 
       //jquery ready ends

@@ -31,9 +31,8 @@ $cat_name= "project";
 
 <div id="main_wrapper">
 
-<!------------ header start ------------------>
-<?php get_header(); ?>
-<!------------ header finish ------------------>
+<!-- Header -->
+    <?php get_header(); ?>
 
 
 <div id="content">
@@ -53,37 +52,34 @@ does not work now cause its blocking acess to iframe
 
  -->
 
-
 <div class="scroll_bar_wrap">
-<div class="scroll_bar_up">
-</div>
-<div id="photo_slider"></div>
-<div class="scroll_bar_down">
-</div>
+  <div class="scroll_bar_up"></div>
+  <div id="photo_slider"></div>
+  <div class="scroll_bar_down"></div>
 </div>
 
 <div id="photo_container">
-<div id="photos">
-<?php
-$max_loop=0;
-$recents= $wpdb->get_results("SELECT post_title as title, ID as post_id, post_content as content, YEAR(post_date) as y
-											       FROM $wpdb->posts
-											       WHERE post_status = 'publish' AND post_type = 'post'
-											       ORDER BY post_date DESC");
+  <div id="photos">
+    <?php
+    $max_loop=0;
+    $recents= $wpdb->get_results("SELECT post_title as title, ID as post_id, post_content as content, YEAR(post_date) as y
+                                 FROM $wpdb->posts
+                                 WHERE post_status = 'publish' AND post_type = 'post'
+                                 ORDER BY post_date DESC");
 
-foreach($recents as $recent) {
-	if(in_category($cat_name,$recent->post_id)){
-	preg_match_all('/<img[^>]+>/i',$recent->content,$img_result);
-	preg_match_all('/<iframe.*src=\"(.*)\".*><\/iframe>/isU',$recent->content,$iframe_result); 
-	echo implode(" ",$iframe_result[0]);
-    echo implode(" ",$img_result[0]);
-	$max_loop++;
-	if($max_loop==1){break;}
-	}
-	
-}
-?>
-</div>
+    foreach($recents as $recent) {
+      if(in_category($cat_name,$recent->post_id)){
+      preg_match_all('/<img[^>]+>/i',$recent->content,$img_result);
+      preg_match_all('/<iframe.*src=\"(.*)\".*><\/iframe>/isU',$recent->content,$iframe_result); 
+      echo implode(" ",$iframe_result[0]);
+        echo implode(" ",$img_result[0]);
+      $max_loop++;
+      if($max_loop==1){break;}
+      }
+      
+    }
+    ?>
+  </div>
 </div>
 
 <div id="des">
@@ -95,23 +91,23 @@ foreach($recents as $recent) {
 // once its goruped, only the first element will be displayed
 
 $years = $wpdb->get_results("SELECT post_title as title, ID as post_id, YEAR(post_date) as y
-											FROM $wpdb->posts
-											WHERE post_status = 'publish' AND post_type = 'post'
-											ORDER BY post_date DESC");
+                      FROM $wpdb->posts
+                      WHERE post_status = 'publish' AND post_type = 'post'
+                      ORDER BY post_date DESC");
 //echo gettype($years);
 
 $prevYear = '';
 foreach($years as $year) {
-			// was written to prevent repeat year display 
-			if ($prevYear != $year->y&&in_category($cat_name,$year->post_id)){
-				$prevYear = $year->y;
-				echo "<li>";
-				echo "<a href='javascript:;' onClick='year_to_post_titles(".$prevYear.",".json_encode($cat_name).")'>";
-				echo $prevYear;
-				echo "</a>";
-				echo "</li>";	
-				echo " / ";
-			}
+      // was written to prevent repeat year display 
+      if ($prevYear != $year->y&&in_category($cat_name,$year->post_id)){
+        $prevYear = $year->y;
+        echo "<li>";
+        echo "<a href='javascript:;' onClick='year_to_post_titles(".$prevYear.",".json_encode($cat_name).")'>";
+        echo $prevYear;
+        echo "</a>";
+        echo "</li>"; 
+        echo " / ";
+      }
 }
 ?>
 </ul>
@@ -124,21 +120,21 @@ Recent :
 $max_loop=0;
 $month = array('','January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 $work_items= $wpdb->get_results("SELECT post_title as title, ID as post_id, YEAR(post_date) as y, MONTH(post_date) as month
-											       FROM $wpdb->posts
-											       WHERE post_status = 'publish' AND post_type = 'post'
-											       ORDER BY post_date DESC");
+                             FROM $wpdb->posts
+                             WHERE post_status = 'publish' AND post_type = 'post'
+                             ORDER BY post_date DESC");
 
 foreach($work_items as $work_item) {
-	if(in_category($cat_name,$work_item->post_id)){
-	echo "<li id='".$work_item->post_id."'>";
-	echo "<a href='javascript:;' onClick='title_to_contents(".json_encode($work_item->post_id).",".json_encode($cat_name).")'>";
-	echo "<span class='project_title'>".$work_item->title."</span>";
-	echo "<span class='project_date'>".$work_item->y." / ".$month[$work_item->month]."</span>";
-	echo "</a>";
-	echo "</li>";
-	$max_loop++;
-	if($max_loop==4){break;}
-	}
+  if(in_category($cat_name,$work_item->post_id)){
+  echo "<li id='".$work_item->post_id."'>";
+  echo "<a href='javascript:;' onClick='title_to_contents(".json_encode($work_item->post_id).",".json_encode($cat_name).")'>";
+  echo "<span class='project_title'>".$work_item->title."</span>";
+  echo "<span class='project_date'>".$work_item->y." / ".$month[$work_item->month]."</span>";
+  echo "</a>";
+  echo "</li>";
+  $max_loop++;
+  if($max_loop==4){break;}
+  }
 }
 ?>
 </ul>
@@ -148,26 +144,22 @@ foreach($work_items as $work_item) {
 <?php
 $max_loop=0;
 $recents= $wpdb->get_results("SELECT post_title as title, ID as post_id, post_content as content, YEAR(post_date) as y
-											       FROM $wpdb->posts
-											       WHERE post_status = 'publish' AND post_type = 'post'
-											       ORDER BY post_date DESC");
+                             FROM $wpdb->posts
+                             WHERE post_status = 'publish' AND post_type = 'post'
+                             ORDER BY post_date DESC");
 
 foreach($recents as $recent) {
-	if(in_category($cat_name,$recent->post_id)){
-	echo "<div class='sub_des_title'>".$recent->title."</div>";	
-	echo "<div class='sub_des_text'>".trim(strip_tags($recent->content),'<&nbsp>')."</div>"; 
-	$max_loop++;
-	if($max_loop==1){break;}
-	}
+  if(in_category($cat_name,$recent->post_id)){
+  echo "<div class='sub_des_title'>".$recent->title."</div>"; 
+  echo "<div class='sub_des_text'>".trim(strip_tags($recent->content),'<&nbsp>')."</div>"; 
+  $max_loop++;
+  if($max_loop==1){break;}
+  }
 }
 ?>
 </div>
 </div>
-<!-- des ------->
-</div>
-<!-- content --->
-</div>
-<!-- outer wrapper -->
+
 </div>
 
 <?php get_footer();?>

@@ -1,9 +1,4 @@
-
-
-
-<?php function get_contributor_logos(){ 
-
-?>
+<?php function get_contributor_logos(){ ?>
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -123,10 +118,7 @@ endwhile;
 } 
 ?>
 
-
-
 <script type="text/javascript">
-
 
 $(document).ready(function(){
 	// default exhibition div current showing
@@ -155,7 +147,6 @@ $(document).ready(function(){
 	$(".exhibition_desc").find("a").attr({target:'_blank'});
 	
 });
-
 
 </script>
 

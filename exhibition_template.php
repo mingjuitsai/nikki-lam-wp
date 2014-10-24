@@ -8,13 +8,13 @@ Template Name: Exhibition Template
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
 
-<script src="<?php bloginfo(template_directory) ?>/js/jquery-1.6.2.min.js " type="text/javascript"></script>
+
 <link rel="stylesheet" href="<?php bloginfo(template_directory) ?>/screen_header.css" type="text/css" charset="utf-8" />
 <link href="<?php bloginfo(template_directory) ?>/screen_exhibition.css" rel="stylesheet" media="screen">
 <link rel="stylesheet" href="<?php bloginfo(template_directory) ?>/minion_stylesheet.css" type="text/css" charset="utf-8" />
 <link rel="stylesheet" href="<?php bloginfo(template_directory) ?>/avant_garde_stylesheet.css" type="text/css" charset="utf-8" />
 <?php include(TEMPLATEPATH.'/php/exhibition_functions.php'); ?>
-
+<script src="<?php bloginfo(template_directory) ?>/js/jquery-1.6.2.min.js " type="text/javascript"></script>
 
 <title>Nikki Lam<?php wp_title('|'); ?></title>
 </head>
