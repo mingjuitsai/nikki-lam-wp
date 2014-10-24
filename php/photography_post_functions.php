@@ -224,7 +224,7 @@ $(function() {
 	e.preventDefault();
 
 	console.log ("delta: " + delta );
-	value += delta*4;
+	value += delta*5;
     if (value > 100) {
         value = 100;
     }

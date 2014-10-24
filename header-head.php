@@ -6,4 +6,4 @@
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 <script src="<?php bloginfo(template_directory) ?>/js/jquery.mousewheel.min.js"></script>
 
-<title>Nikki Lam</title>
+<title>Nikki Lam<?php wp_title('|'); ?></title>
