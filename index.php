@@ -37,7 +37,7 @@
           /* get posts titles, contents
           from front_page_slideshow category
           store in php array $post_contents, $post_titles */
-        get_posts_info();
+          get_posts_info();
       ?>
 
     <div id="images_container">
@@ -52,7 +52,7 @@
       </div>
 
       <div id="sub_des">
-        <?php   echo strip_tags($post_contents[0]); ?>
+        <?php echo strip_tags($post_contents[0]); ?>
       </div>
 
     </div>
@@ -73,21 +73,20 @@
       $(document).ready(function(){
 
       var post_contents_js=[
-        /* store php post_contents array to js variable */  
+        /* get content, echo from php function to js object, see function.php */  
         <?php js_post_contents(); ?>
       ];
       var post_titles_js= [
-        /* store php post_titles array to js variable */  
+        /* get title, echo from php function to js object, see function.php */  
         <?php js_post_titles();?>
       ];
       var post_artworks_js=[
         <?php js_post_artworks(); ?>
       ];
 
-      /* slide_show setting
+      /* Slide Show
       ---------------------------------------------*/
       var slide_show_time= 8000;
-
       var timer=setInterval(function(){slide_show();},slide_show_time);
 
       $("#content").click(function(){
@@ -139,22 +138,24 @@
         
         /*animate and loop titles*/
         $("#des_title").animate({opacity:opacity_out},fade_out_speed,function(){
-        $("#des_title").html(post_titles_js[post_text_id]);
-        $("#des_title").animate({opacity:opacity_in},fade_in_speed)});
+          $("#des_title").html(post_titles_js[post_text_id]);
+          $("#des_title").animate({opacity:opacity_in},fade_in_speed);
+        });
         /*animate and loop contents*/
         $("#sub_des").animate({opacity:opacity_out},fade_out_speed,function(){
-        $("#sub_des").html(post_contents_js[post_text_id]);
-        $("#sub_des").animate({opacity:opacity_in},fade_in_speed)});
-        /* animate and loop img*/
-        
-        $("#slideshow_images  .artworks_block:first").fadeOut(900).next('.artworks_block').fadeIn(500).end().appendTo("#slideshow_images");
+          $("#sub_des").html(post_contents_js[post_text_id]);
+          $("#sub_des").animate({opacity:opacity_in},fade_in_speed);
+        });
+        /* animate and loop img*/   
+        $("#slideshow_images .artworks_block:first").fadeOut(900).next('.artworks_block').fadeIn(500).end().appendTo("#slideshow_images");
 
-          
+          console.log(post_text_id);
         if(post_text_id+1==post_titles_js.length){
           post_text_id=0;
+          console.log(post_text_id);
         }else{ 
           post_text_id++;
-          }
+        }
 
       }
 
