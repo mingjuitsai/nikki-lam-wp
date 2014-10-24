@@ -16,13 +16,11 @@ function trim_title(html){
 	}
 }
 
-
 $(document).ready(function(	){
 	$("#years li").click(function(){
 		$(this).siblings("li").css({'background':'none'});
 		$(this).css({'background':'#faee9b'});	
 	});
-	
 	
 	//set first element as requested item 
 	requested=$("#work_items li:first").attr('id');
@@ -44,8 +42,6 @@ $(document).ready(function(	){
 					$(this).parent("div:first").removeClass('loading');	
 					//$(this).animate({opacity:0},300);
 	});
-	
-	
 	
 });
 
@@ -215,13 +211,13 @@ $(function() {
 		}
 	});
 	
-	$("#content,#photo_slider").bind('mousewheel DOMMouseScroll', function (e) {
+	$("#content , #photo_slider").bind('mousewheel DOMMouseScroll', function (e) {
     var delta = 0, element = $("#photo_slider"), value, left;
     value = element.slider('value');
     if (e.wheelDelta) {
         delta = e.wheelDelta;
     }
-	//alert(delta);
+	//alert(delta + "value: " + value);
 	if(e.HORIZONTAL_AXIS){
 	    delta= e.HORIZONTAL_AXIS;
 	}

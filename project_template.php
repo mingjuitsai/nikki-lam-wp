@@ -6,12 +6,8 @@ Template Name: Project Template
 
 <html>
 <head>
-<meta charset="<?php bloginfo( 'charset' ); ?>" />
 
-<link href="<?php bloginfo(template_directory) ?>/style.css" rel="stylesheet" media="screen">
-<link rel="stylesheet" href="<?php bloginfo(template_directory) ?>/css/nikki_lam/jquery-ui-1.8.16.custom.css" type="text/css" />
-<script src="<?php bloginfo(template_directory) ?>/js/jquery-1.6.2.min.js" type="text/javascript"></script>
-<script src="<?php bloginfo(template_directory) ?>/js/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
+<?php get_header("head"); ?>
 
 <?php include(TEMPLATEPATH.'/php/photography_post_functions.php'); ?>
 <?php
