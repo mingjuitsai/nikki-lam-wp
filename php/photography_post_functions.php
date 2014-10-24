@@ -211,22 +211,20 @@ $(function() {
 		}
 	});
 	
-	$("#content , #photo_slider").bind('mousewheel DOMMouseScroll', function (e) {
+	$("#content , #photo_slider").mousewheel(function ( e , delta ) {
     var delta = 0, element = $("#photo_slider"), value, left;
     value = element.slider('value');
     if (e.wheelDelta) {
         delta = e.wheelDelta;
     }
 	//alert(delta + "value: " + value);
-	if(e.HORIZONTAL_AXIS){
-	    delta= e.HORIZONTAL_AXIS;
+	if(e.deltaY){
+	    delta= e.deltaY;
 	}
-    if (e.detail) {
-        delta =- e.detail*10;
-    }
 	e.preventDefault();
 
-	value += delta/5;
+	console.log ("delta: " + delta );
+	value += delta*4;
     if (value > 100) {
         value = 100;
     }
