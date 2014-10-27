@@ -1,6 +1,4 @@
 
-<script type="text/javascript">
-
 $(document).ready(function(){
 	
 	// unlink nav that has children for sliding out
@@ -32,5 +30,3 @@ $(document).ready(function(){
 	});
 
 });
-
-</script>

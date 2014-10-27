@@ -1,9 +1,4 @@
 
-
-<?php include(TEMPLATEPATH.'/php/navigation_functions.php'); ?>
-<?php //var_dump(error_reporting(E_ALL)); include(TEMPLATEPATH.'/php/simple_html_dom.php'); ?>
-
-
 <header id="header">
 
   <div id="header_top">

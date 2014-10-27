@@ -1,4 +1,36 @@
 <?php
+
+
+// Enable feature image theme support 
+add_theme_support( 'post-thumbnails' ); 
+
+
+// This theme uses wp_nav_menu() in one location.
+register_nav_menus( array(
+  'primary' => __( 'Primary Menu', 'community-finance' ),
+  'slider'  => __( 'Slider Menu', 'community-finance-slider' )
+) );
+
+
+/* Enqueue scripts and styles.
+------------------------------*/
+function nikki_lam_scripts() {
+
+  wp_enqueue_style( 'jqueryUI-css', get_template_directory_uri() . '/css/jquery-ui-1.8.16.custom.css' );
+  wp_enqueue_style( 'nikki-lam-style', get_stylesheet_uri() );
+  /* js */
+  wp_enqueue_script( 'nikki-lam-jquery' , '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js', array(), '20120203', true );
+  wp_enqueue_script( 'nikki-lam-jqueryUI', '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js', array(), '20120208', true );
+  wp_enqueue_script( 'nikki-lam-jqueryWheel', get_template_directory_uri() . '/js/jquery.mousewheel.min.js', array(), '20120209', true );
+  wp_enqueue_script( 'nikki-lam-siteJs', get_template_directory_uri() . '/js/site.js', array(), '20120210', true );
+  
+}
+// add all styles and custom script style
+add_action( 'wp_enqueue_scripts', 'nikki_lam_scripts' );
+
+
+/* Get first image function 
+------------------------------*/
 function get_first_image() {
   global $post, $posts;
   $post_img = '';
@@ -8,7 +40,9 @@ function get_first_image() {
   $post_img = $matches [1] [0];
   return $post_img;
 } 
-/* get posts info */
+
+/* get posts info 
+------------------------------*/
 function get_posts_info() {
   global $post;
   $category = get_the_category();
@@ -37,7 +71,8 @@ function get_post_artworks($post_num) {
   //return $post_img.$post_vimeo;
 } 
 
-/* js post content */
+/* js post content 
+------------------------------*/
 function js_post_contents(){
   global $post_contents;
   if (count($post_contents)>1){
@@ -47,7 +82,8 @@ function js_post_contents(){
   }};
 }
 
-/* js post titles */
+/* js post titles 
+------------------------------*/
   function js_post_titles(){
   global $post_titles;
   if (count($post_titles)>1){
@@ -57,7 +93,8 @@ function js_post_contents(){
   }};
 }
 
-/* js post artworks */
+/* js post artworks 
+------------------------------*/
 function js_post_artworks(){
   global $post_contents;
   if (count($post_contents)>=1){
@@ -67,7 +104,8 @@ function js_post_artworks(){
     }};
 }
 
-/* Ajax year to post title callback */
+/* Ajax year to post title callback 
+------------------------------*/
 add_action('wp_ajax_year_to_post_titles', 'year_to_post_titles_callback');
 add_action('wp_ajax_nopriv_year_to_post_titles', 'year_to_post_titles_callback');
 function year_to_post_titles_callback(){
@@ -94,7 +132,8 @@ function year_to_post_titles_callback(){
   die();
 }
 
-/* Ajax title to content call back */
+/* Ajax title to content call back 
+------------------------------*/
 add_action('wp_ajax_title_to_contents', 'title_to_contents_callback');
 add_action('wp_ajax_nopriv_title_to_contents', 'title_to_contents_callback');
 function title_to_contents_callback(){

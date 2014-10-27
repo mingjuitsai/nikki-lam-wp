@@ -5,3 +5,4 @@
 Copyrights &copy; Nikki Lam 2008-2011 
 </div>
 </div>
+<?php wp_footer(); ?>

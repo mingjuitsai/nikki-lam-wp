@@ -6,8 +6,10 @@ Template Name: Project Template
 
 <html>
 <head>
-
-<?php get_header("head"); ?>
+  <?php wp_head(); ?>
+  <title>
+    <?php wp_title( '|', true, 'right' ); ?>
+  </title>
 
 <?php include(TEMPLATEPATH.'/php/photography_post_functions.php'); ?>
 <?php
