@@ -1,6 +1,5 @@
 <?php
 
-
 // Enable feature image theme support 
 add_theme_support( 'post-thumbnails' ); 
 
@@ -23,6 +22,13 @@ function nikki_lam_scripts() {
   wp_enqueue_script( 'nikki-lam-jqueryUI', '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js', array(), '20120208', true );
   wp_enqueue_script( 'nikki-lam-jqueryWheel', get_template_directory_uri() . '/js/jquery.mousewheel.min.js', array(), '20120209', true );
   wp_enqueue_script( 'nikki-lam-siteJs', get_template_directory_uri() . '/js/site.js', array(), '20120210', true );
+  if(is_home()){
+    wp_enqueue_script( 'nikki-lam-slideshowJs', get_template_directory_uri() . '/js/slideshow.js', array(), '20120212', true );
+  }
+  
+  wp_enqueue_script( 'nikki-lam-projectJS', get_template_directory_uri() . '/js/photography_post_functions.js', array(), '20120211', true );
+  wp_localize_script( 'nikki-lam-projectJS', 'NikkiAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+  wp_localize_script( 'nikki-lam-siteJs', 'NikkiAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
   
 }
 // add all styles and custom script style
@@ -43,8 +49,10 @@ function get_first_image() {
 
 /* get posts info 
 ------------------------------*/
-function get_posts_info() {
+function get_posts_info($catName) {
   global $post;
+  $catID = get_category_by_slug('category-slug'); 
+  $id = $idObj->term_id;
   $category = get_the_category();
   $catID= $category[0]->cat_ID; 
   $arg= array( 'numberposts'=>10, 'category'=>$catID,'orderby'=>'post_date','post_status'=>'publish');
@@ -73,7 +81,10 @@ function get_post_artworks($post_num) {
 
 /* js post content 
 ------------------------------*/
-function js_post_contents(){
+add_action('wp_ajax_js_post_contents', 'js_post_contents_callback');
+add_action('wp_ajax_nopriv_js_post_contents', 'js_post_contents_callback');
+function js_post_contents_callback(){
+  get_posts_info();
   global $post_contents;
   if (count($post_contents)>1){
   echo '"'.preg_replace('/\s\s+/', ' ', trim(strip_tags($post_contents[0]))).'"';
@@ -84,7 +95,10 @@ function js_post_contents(){
 
 /* js post titles 
 ------------------------------*/
-  function js_post_titles(){
+add_action('wp_ajax_js_post_titles', 'js_post_titles_callback');
+add_action('wp_ajax_nopriv_js_post_titles', 'js_post_titles_callback');
+  function js_post_titles_callback(){
+  get_posts_info();
   global $post_titles;
   if (count($post_titles)>1){
   echo '"'.$post_titles[0].'"';
@@ -95,7 +109,9 @@ function js_post_contents(){
 
 /* js post artworks 
 ------------------------------*/
-function js_post_artworks(){
+add_action('wp_ajax_js_post_artworks', 'js_post_artworks_callback');
+add_action('wp_ajax_nopriv_js_post_artworks', 'js_post_artworks_callback');
+function js_post_artworks_callback(){
   global $post_contents;
   if (count($post_contents)>=1){
   echo "'".get_post_artworks(0)."'";

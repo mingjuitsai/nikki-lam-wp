@@ -11,7 +11,7 @@ Template Name: Project Template
     <?php wp_title( '|', true, 'right' ); ?>
   </title>
 
-<?php include(TEMPLATEPATH.'/php/photography_post_functions.php'); ?>
+<?php //include(TEMPLATEPATH.'/php/photography_post_functions.php'); ?>
 <?php
 // declare what category you wanna get here
 $cat_name= "project"; 
