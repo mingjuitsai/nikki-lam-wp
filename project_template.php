@@ -65,10 +65,10 @@ does not work now cause its blocking acess to iframe
     </div>
   </div>
 
-  <div class="des">
+  <div class="des clear">
 
-    <div id="work_list">
-      <ul id="years">
+    <div class="work_list">
+      <ul class="years">
       <?php
 
       // once its goruped, only the first element will be displayed

@@ -21,9 +21,9 @@ $(document).ready(function(){
   container_width = $(".photo_container").width();
   console.log(container_width);
 
-  $("#years li").click(function(){
+  $(".years li").click(function(){
     $(this).siblings("li").css({'background':'none'});
-    $(this).css({'background':'#faee9b'});  
+    $(this).addClass(".active");
   });
   
   //set first element as requested item 
