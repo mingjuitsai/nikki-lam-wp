@@ -17,11 +17,8 @@
 
 <body>
 
-
   <div id="outer_wrapper">
-
     <div id="main_wrapper">
-
 
       <!-- Header -->
       <?php get_header(); ?>
@@ -44,62 +41,53 @@
                         echo implode($result[0]);
                         ?>
                       </div>
-                      <div class="des">
-                        <div class="exhibition_title">
-                        <?php the_title(); ?>
-                        </div>
-                        <div class="exhibition_desc">
+                      <div class="exhibition_sec">
+                        <h3 class="exhibition_title">
+                          <?php the_title(); ?>
+                        </h3>
 
-                          <!-- info section -->
-                          <div class="exhibition_info">
-
-                            <div class="ex_info_div">
-                              <div class="ex_info_title">
-                                location:
-                              </div>
-                              <div class="ex_info_value">
-                                <?php 
-                                $meta=get_post_meta(get_the_ID(), 'location', true);
-                                if($meta==''){echo "updates coming soon";}else{echo $meta;}
-                                ?>
-                              </div>
-                            </div>
-
-                            <div class="ex_info_div">
-                              <div class="ex_info_title">
-                                date: 
-                              </div><!--
-                              --><div class="ex_info_value">
-                              <?php 
-                              $meta=get_post_meta(get_the_ID(), 'date', true);
-                              if($meta==''){echo "updates coming soon";}else{echo $meta;}
-                              ?>
-                              </div>
-                            </div>
-
-                            <div class="ex_info_div">
-                              <div class="ex_info_title">
-                                price: 
-                              </div>
-                              <div class="ex_info_value">
-                                <?php 
-                                $meta=get_post_meta(get_the_ID(), 'price', true);
-                                if($meta==''){echo "update coming soon";}else{echo $meta;}
-                                ?>
-                              </div>
-                            </div>
-
-                          </div>
-
+                        <h5 class="ex_info_title">
+                          location:
+                        </h5>
+                        <h5 class="ex_info_value">
                           <?php 
-                            // this will prevent the get_the_content removing the paragraph tag
-                            $content = trim(strip_tags(get_the_content()),'<&nbsp>'); 
-                            $content = apply_filters('the_content', $content);
-                            $content = str_replace(']]>', ']]&gt;', $content);
-                            echo $content;
+                          $meta=get_post_meta(get_the_ID(), 'location', true);
+                          if($meta==''){echo "updates coming soon";}else{echo $meta;}
                           ?>
-                        </div>
+                        </h5>
 
+                        <h5 class="ex_info_title">
+                          date: 
+                        </h5>
+                        <h5 class="ex_info_value">
+                          <?php 
+                          $meta=get_post_meta(get_the_ID(), 'date', true);
+                          if($meta==''){echo "updates coming soon";}else{echo $meta;}
+                          ?>
+                        </h5>
+
+                        <h5 class="ex_info_title">
+                          price: 
+                        </h5>
+                        <h5 class="ex_info_value">
+                          <?php 
+                          $meta=get_post_meta(get_the_ID(), 'price', true);
+                          if($meta==''){echo "update coming soon";}else{echo $meta;}
+                          ?>
+                        </h5>
+                        
+                        <article class="exhibition_des">
+                          <?php 
+                          // this will prevent the get_the_content removing the paragraph tag
+                          $content = trim(strip_tags(get_the_content()),'<&nbsp>'); 
+                          $content = apply_filters('the_content', $content);
+                          $content = str_replace(']]>', ']]&gt;', $content);
+                          echo $content;
+                          ?>
+                        </article>
+                          
+                      </div>
+                        
                         <?php 
                         // this function display all images and filter in and out of the sponsor images
                         // if no sponsors remove empty this div
@@ -115,7 +103,6 @@
                           </div>
                         </div>
 
-                      </div>
                       <!-- desc ends -->
                     </div>
                     <!-- single exhibition -->

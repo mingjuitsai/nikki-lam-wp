@@ -513,16 +513,10 @@ for middle vertical alignment
 	text-decoration:underline;
 }
 
-.exhibition_title{
-	color:#960;
-	clear:both;
-	font-size:18px;
-}
 
 .exhibition_image{
 	width:50%;
 	float:left;
-	margin-right:14px;
 	overflow:hidden;
 	border:solid 1px #FFF;
 	border-radius:10px;
@@ -535,23 +529,23 @@ for middle vertical alignment
 	height:auto;
 }
 
-.des{
-	font-size:12px;
-	overflow:auto;
-	/*background:#FC6;*/
+.exhibition_sec{
+	width: 50%;
+	float:left;
+	padding: 0 1.5%;
 }
 
-.exhibition_info{
-	width:100%;
-	margin:8px 0px 15px 0px;
-}
-
-.ex_info_div{	
+.exhibition_title{
+	color:#960;
 	clear:both;
-	width:100%;
-	display:inline-block;
-	margin-bottom:3px;
+	font-size:18px;
 }
+
+
+
+
+
+
 .ex_info_title{
 	display:inline-block;
 	color:#ADADAD;
