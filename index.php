@@ -29,11 +29,11 @@
           /* get posts titles, contents
           from front_page_slideshow category
           store in php array $post_contents, $post_titles */
-          get_posts_info();
+          get_posts_info('front_page_slideshow');
       ?>
 
     <div id="images_container">
-      <div id="slideshow_images">
+      <div id="slideshow_images" class="loading">
       </div>
     </div>
 
@@ -54,7 +54,7 @@
 
   <?php endwhile; ?>
 
-  
+
 
 <!-- Loop end -->
 </div>

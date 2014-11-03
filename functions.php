@@ -22,11 +22,11 @@ function nikki_lam_scripts() {
   wp_enqueue_script( 'nikki-lam-jqueryUI', '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js', array(), '20120208', true );
   wp_enqueue_script( 'nikki-lam-jqueryWheel', get_template_directory_uri() . '/js/jquery.mousewheel.min.js', array(), '20120209', true );
   wp_enqueue_script( 'nikki-lam-siteJs', get_template_directory_uri() . '/js/site.js', array(), '20120210', true );
+  wp_enqueue_script( 'nikki-lam-projectJS', get_template_directory_uri() . '/js/photography_post_functions.js', array(), '20120211', true );
   if(is_home()){
     wp_enqueue_script( 'nikki-lam-slideshowJs', get_template_directory_uri() . '/js/slideshow.js', array(), '20120212', true );
   }
-  
-  wp_enqueue_script( 'nikki-lam-projectJS', get_template_directory_uri() . '/js/photography_post_functions.js', array(), '20120211', true );
+  // ajax attach 
   wp_localize_script( 'nikki-lam-projectJS', 'NikkiAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
   wp_localize_script( 'nikki-lam-siteJs', 'NikkiAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
   
@@ -50,13 +50,11 @@ function get_first_image() {
 /* get posts info 
 ------------------------------*/
 function get_posts_info($catName) {
-  global $post;
-  $catID = get_category_by_slug('category-slug'); 
-  $id = $idObj->term_id;
-  $category = get_the_category();
-  $catID= $category[0]->cat_ID; 
+  $catObj = get_category_by_slug($catName); 
+  $catID = $catObj->term_id;
   $arg= array( 'numberposts'=>10, 'category'=>$catID,'orderby'=>'post_date','post_status'=>'publish');
-  $posts_info= get_posts($arg);   
+  $posts_info= get_posts($arg);
+  global $post;   
   global $post_titles;
   global $post_contents;
   foreach( $posts_info as $post){
@@ -67,8 +65,7 @@ function get_posts_info($catName) {
 }
 
 //for function js_post_artworks
-function get_post_artworks($post_num) {
-  global $post_contents;
+function get_post_artworks($post_num,$post_contents) {
   $img=preg_match_all('/<img[^>]+>/i', $post_contents[$post_num], $img_matches);
   // if there's vimeo player, use it to grab vimeo information 
   //preg_match_all('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $post_contents[$post_num], $vimeo_matches);
@@ -84,13 +81,15 @@ function get_post_artworks($post_num) {
 add_action('wp_ajax_js_post_contents', 'js_post_contents_callback');
 add_action('wp_ajax_nopriv_js_post_contents', 'js_post_contents_callback');
 function js_post_contents_callback(){
-  get_posts_info();
+  $cat = $_POST["category"];
+  get_posts_info($cat);
   global $post_contents;
-  if (count($post_contents)>1){
-  echo '"'.preg_replace('/\s\s+/', ' ', trim(strip_tags($post_contents[0]))).'"';
-  for ($c=1; $c<count($post_contents); $c++){
-  echo ','.'"'.preg_replace('/\s\s+/', ' ', trim(strip_tags($post_contents[$c]))).'"';
-  }};
+  $results = array();
+  for ($c=0; $c<count($post_contents); $c++){
+    $results[] = preg_replace('/\s\s+/', ' ', trim(strip_tags($post_contents[$c])));
+  };
+  echo json_encode($results);
+  die();
 }
 
 /* js post titles 
@@ -98,13 +97,15 @@ function js_post_contents_callback(){
 add_action('wp_ajax_js_post_titles', 'js_post_titles_callback');
 add_action('wp_ajax_nopriv_js_post_titles', 'js_post_titles_callback');
   function js_post_titles_callback(){
-  get_posts_info();
+  $cat = $_POST["category"];
+  get_posts_info($cat);
   global $post_titles;
-  if (count($post_titles)>1){
-  echo '"'.$post_titles[0].'"';
-  for ($i=1; $i<count($post_titles); $i++){
-    echo ','.'"'.trim($post_titles[$i]).'"';
-  }};
+  $results = array();
+  for ($i=0; $i<count($post_titles); $i++){
+    $results[] = trim($post_titles[$i]);
+  };
+  echo json_encode($results);
+  die();
 }
 
 /* js post artworks 
@@ -112,12 +113,15 @@ add_action('wp_ajax_nopriv_js_post_titles', 'js_post_titles_callback');
 add_action('wp_ajax_js_post_artworks', 'js_post_artworks_callback');
 add_action('wp_ajax_nopriv_js_post_artworks', 'js_post_artworks_callback');
 function js_post_artworks_callback(){
+  $cat = $_POST["category"];
+  get_posts_info($cat);
   global $post_contents;
-  if (count($post_contents)>=1){
-  echo "'".get_post_artworks(0)."'";
-  for ($a=1; $a < count($post_contents); $a++){
-  echo ","."'".get_post_artworks($a)."'";
-    }};
+  $results = array();
+  for ($a=0; $a < count($post_contents); $a++){
+    $results[]= get_post_artworks($a,$post_contents);
+  };
+  echo json_encode($results);
+  die();
 }
 
 /* Ajax year to post title callback 
