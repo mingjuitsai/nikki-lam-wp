@@ -3,7 +3,6 @@
 // Enable feature image theme support 
 add_theme_support( 'post-thumbnails' ); 
 
-
 // This theme uses wp_nav_menu() in one location.
 register_nav_menus( array(
   'primary' => __( 'Primary Menu', 'community-finance' ),
@@ -78,49 +77,32 @@ function get_post_artworks($post_num,$post_contents) {
 
 /* js post content 
 ------------------------------*/
-add_action('wp_ajax_js_post_contents', 'js_post_contents_callback');
-add_action('wp_ajax_nopriv_js_post_contents', 'js_post_contents_callback');
-function js_post_contents_callback(){
-  $cat = $_POST["category"];
-  get_posts_info($cat);
-  global $post_contents;
-  $results = array();
-  for ($c=0; $c<count($post_contents); $c++){
-    $results[] = preg_replace('/\s\s+/', ' ', trim(strip_tags($post_contents[$c])));
-  };
-  echo json_encode($results);
-  die();
-}
-
-/* js post titles 
-------------------------------*/
-add_action('wp_ajax_js_post_titles', 'js_post_titles_callback');
-add_action('wp_ajax_nopriv_js_post_titles', 'js_post_titles_callback');
-  function js_post_titles_callback(){
+add_action('wp_ajax_js_fetch_catPosts', 'js_fetch_catPosts_callback');
+add_action('wp_ajax_nopriv_js_fetch_catPosts', 'js_fetch_catPosts_callback');
+function js_fetch_catPosts_callback(){
   $cat = $_POST["category"];
   get_posts_info($cat);
   global $post_titles;
-  $results = array();
-  for ($i=0; $i<count($post_titles); $i++){
-    $results[] = trim($post_titles[$i]);
-  };
-  echo json_encode($results);
-  die();
-}
-
-/* js post artworks 
-------------------------------*/
-add_action('wp_ajax_js_post_artworks', 'js_post_artworks_callback');
-add_action('wp_ajax_nopriv_js_post_artworks', 'js_post_artworks_callback');
-function js_post_artworks_callback(){
-  $cat = $_POST["category"];
-  get_posts_info($cat);
   global $post_contents;
-  $results = array();
-  for ($a=0; $a < count($post_contents); $a++){
-    $results[]= get_post_artworks($a,$post_contents);
+  $post_contents_result;
+  $post_titles_result;
+  $post_artworks_result;
+
+  for ($c=0; $c<count($post_contents); $c++){
+    $post_contents_result[] = preg_replace('/\s\s+/', ' ', trim(strip_tags($post_contents[$c])));
   };
-  echo json_encode($results);
+  for ($i=0; $i<count($post_titles); $i++){
+    $post_titles_result[] = trim($post_titles[$i]);
+  };
+  for ($a=0; $a < count($post_contents); $a++){
+    $post_artworks_result[]= get_post_artworks($a,$post_contents);
+  };
+
+  echo json_encode(array(
+                  "post_titles_json" => $post_titles_result,
+                  "post_contents_json" => $post_contents_result,
+                  "post_artworks_json" => $post_artworks_result
+  ));
   die();
 }
 

@@ -32,18 +32,18 @@
           get_posts_info('front_page_slideshow');
       ?>
 
-    <div id="images_container">
-      <div id="slideshow_images" class="loading">
+    <div class="images_container">
+      <div class="loading slideshow_images slideshow_images_jshook">
       </div>
     </div>
 
-    <div id="des">
+    <div class="des">
 
-      <div id="des_title">
+      <div class="des_title">
         <?php echo $post_titles[0]; ?>
       </div>
 
-      <div id="sub_des">
+      <div class="sub_des">
         <?php echo strip_tags($post_contents[0]); ?>
       </div>
 
