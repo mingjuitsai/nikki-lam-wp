@@ -11,14 +11,12 @@ Template Name: Project Template
     <?php wp_title( '|', true, 'right' ); ?>
   </title>
 
-<?php //include(TEMPLATEPATH.'/php/photography_post_functions.php'); ?>
-<?php
-// declare what category you wanna get here
-$cat_name= "project"; 
-?>
+  <?php
+  // declare what category you wanna get here
+  $cat_name= "project"; 
+  ?>
 
-
-<title>Nikki Lam</title>
+  <title>Nikki Lam</title>
 </head>
 
 <body>
@@ -73,7 +71,7 @@ does not work now cause its blocking acess to iframe
   </div>
 </div>
 
-<div id="des">
+<div class="des">
 
 <div id="work_list">
 <ul id="years">
@@ -131,7 +129,7 @@ foreach($work_items as $work_item) {
 </ul>
 </div>
 
-<div id="sub_des">
+<div class="sub_des">
 <?php
 $max_loop=0;
 $recents= $wpdb->get_results("SELECT post_title as title, ID as post_id, post_content as content, YEAR(post_date) as y
