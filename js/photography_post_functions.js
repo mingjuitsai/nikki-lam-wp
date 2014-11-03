@@ -13,8 +13,15 @@ function trim_title(html){
 	return return_title;
 	}
 }
+// get photo container dynamic width
 
-$(document).ready(function(	){
+
+
+$(document).ready(function(){
+
+var container_width = $(".photo_container").width();
+console.log(container_width);
+
 	$("#years li").click(function(){
 		$(this).siblings("li").css({'background':'none'});
 		$(this).css({'background':'#faee9b'});	
@@ -36,17 +43,15 @@ $(document).ready(function(	){
 					$(this).html(trim_title($(this).html()));
 			});
 	
-	$("#photos").children("img, iframe").wrap($('<div>',{"class":"loading"})).load(function(){
+	$(".photos").children("img, iframe").wrap($('<div>',{"class":"loading"})).load(function(){
 					$(this).parent("div:first").removeClass('loading');	
 					//$(this).animate({opacity:0},300);
 	});
 	
-});
+
 
 
 function year_to_post_titles(year,cat_name){
-	$(document).ready(function(){
-	
 	//alert("year to post");
 	var data={
 		action:'year_to_post_titles',
@@ -77,14 +82,12 @@ function year_to_post_titles(year,cat_name){
 			});
 		}
 	);
-});
-//jQuery ready ends
 }
 
 
 //title to content, update description and images, via animation 
 function title_to_contents(post_id,cat_name){
-	$(document).ready(function(){
+
 		if (requested==post_id){
 			return;
 			}else{
@@ -117,37 +120,35 @@ function title_to_contents(post_id,cat_name){
 			//alert(content_img);
 			//var content_img=$('<div>').append($(response.content).find("img").clone()).remove().html();
 			if(content_cat.indexOf('photography')!=-1){
-					$("#photos").html(content_img);
+					$(".photos").html(content_img);
 				}else if(content_cat=='project'){
-					$("#photos").html(content_vimeo+content_img)
+					$(".photos").html(content_vimeo+content_img)
 										// add class to all the iframes
 									   .find("iframe").addClass("vimeo");
 				}
-			// if content is not wider than 600px hide previous shown scrollbar
-			if(	$("#photos").innerWidth() <=600){
+			// if content is not wider than container_widthpx hide previous shown scrollbar
+			if(	$(".photos").innerWidth() <=container_width){
 				$(".scroll_bar_wrap").dequeue().animate({opacity:0},200);
 			}
 			
-			$("#photos").children("img, iframe").wrap($('<div>',{"class":"loading"})).load(function(){
+			$(".photos").children("img, iframe").wrap($('<div>',{"class":"loading"})).load(function(){
 					$(this).parent("div:first").removeClass('loading');	
 					//$(this).animate({opacity:0},300);
 					//alert($(this).parent("div:first").attr("class"));
 					});
 		
-			//alert($("#photos").html());
+			//alert($(".photos").html());
 			// reset slider and photo marginLeft
 			$("#photo_slider").slider('value',100);
-			$("#photos").dequeue().animate({marginLeft:0},330);
+			$(".photos").dequeue().animate({marginLeft:0},330);
 		
-			//$("#photos").animate({opacity:0},300);
 		
 		},"json");
-	});
+
 }
 
 /*  slider functions  mouse enter fade in */
 
-$(document).ready(function(){
 	var fade_timer;
 	function onmousestop(){
 		$(".scroll_bar_wrap").dequeue().animate({opacity:0},500);
@@ -159,20 +160,20 @@ $(document).ready(function(){
 	$("#content").mousemove(
 		function(){
 			// if no scroll needed hide prev shown scroll bar and return do not show
-			if(	$("#photos").innerWidth() <=600){
+			if(	$(".photos").innerWidth() <=container_width){
 				$(".scroll_bar_wrap").dequeue().animate({opacity:0},400);
 				return;
 			}
 			
 			$(".scroll_bar_wrap").dequeue().animate({opacity:1},400);
 			clearTimeout(fade_timer);
-			fade_timer=setTimeout(onmousestop,6000);
+			fade_timer=setTimeout(onmousestop,container_width);
 	});
 	
 	$("#content").mouseleave(
 		function(){
 			// if no scroll needed do not operate
-			if(	$("#photos").innerWidth() <=600){
+			if(	$(".photos").innerWidth() <=container_width){
 				return;
 			}
 			$(".scroll_bar_wrap").dequeue().animate({opacity:0},400);
@@ -186,12 +187,10 @@ $(document).ready(function(){
 	$("#hover_block").mouseup(function(){
 		$(this).css({"pointer-events":"auto"});
 	});
-	
-	
-});
 
 
-$(function() {
+
+
 	$("#photo_slider").slider({
 		orientation:'vertical',
 		min: 0,
@@ -200,8 +199,8 @@ $(function() {
 		range: "max",
 		slide:function(e,ui){
 					// slider is sliding the div scroll across too 
-					var slide_left=-($("#photos").innerWidth()-600)*(1-(ui.value/100));
-					$("#photos").dequeue().animate({marginLeft:slide_left},200);
+					var slide_left=-($(".photos").innerWidth()-container_width)*(1-(ui.value/100));
+					$(".photos").dequeue().animate({marginLeft:slide_left},200);
 		},
 		stop:function(e,ui){
 						// this get ride of the release outside slider and still drag 
@@ -230,17 +229,19 @@ $(function() {
         value = 0;
     }    
 	element.slider('value',value);
-	// minus 600 to 
-	var left=-($("#photos").innerWidth()-600)*(1-(value/100));
-	// left > 0 means the #photos innerWidth is smaller than 600px, image inside is smaller than 600px
+	// minus container_width to 
+	var left=-($(".photos").innerWidth()-container_width)*(1-(value/100));
+	// left > 0 means the .photos innerWidth is smaller than container_widthpx, image inside is smaller than container_widthpx
 	// then do not move the #photo at all 
 	if(left>0){return;}
 	
-	$("#photos").dequeue().animate({marginLeft:left},200);
+	$(".photos").dequeue().animate({marginLeft:left},200);
 		
 	
 	//this div reports delta 
 	//$("#delta").html("left:  "+left+"  value:  "+value);
 		
 });
+
+
 });

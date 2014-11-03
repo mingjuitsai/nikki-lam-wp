@@ -35,16 +35,12 @@ $cat_name= "project";
 <!-- report left margin value and slider value 
 <div id="delta">asdasdasd</div>
 -->
-
 <!-- hack for iframe hover does not work 
 due to cross-domain jquery funciton call 
 this is not figured out, temp solution
-
 does not work now cause its blocking acess to iframe
-
 <div id="hover_block">
 </div>
-
  -->
 
 <div class="scroll_bar_wrap">
@@ -53,8 +49,8 @@ does not work now cause its blocking acess to iframe
   <div class="scroll_bar_down"></div>
 </div>
 
-<div id="photo_container">
-  <div id="photos">
+<div class="photo_container">
+  <div class="photos">
     <?php
     $max_loop=0;
     $recents= $wpdb->get_results("SELECT post_title as title, ID as post_id, post_content as content, YEAR(post_date) as y

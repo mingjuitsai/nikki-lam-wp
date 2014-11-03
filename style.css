@@ -205,6 +205,7 @@ for middle vertical alignment
 
 .slideshow_images{
 	cursor:pointer;
+	height: 100%;
 }
 
 .slideshow_images .artworks_block{
@@ -258,17 +259,17 @@ for middle vertical alignment
 	height:1px;
 }
 
-#photo_container{
+.photo_container{
 	overflow:hidden;
-	width:600px;
+	width:100%;
 	height:402px;
 }
-#photos{
+.photos{
 	display:table;
 	white-space:nowrap;
 }
 
-#photos div{
+.photos div{
 	vertical-align:top;
 	display:inline-block;
 }
@@ -291,7 +292,7 @@ for middle vertical alignment
 ------------------------------*/
 
 .des{
-	margin:8px 0px;
+	margin:1.15rem 0px;
 }
 
 .des_title{
@@ -305,13 +306,13 @@ for middle vertical alignment
 }
 
 .sub_des{
-	display:inline-block;
-	width:255px;
-	font-size:13px;
-	color:#777;
-	padding:10px 10px 10px 19px;
-	border-left:solid 1px #CCC;
-	font-family:AvantGarde Bk BT, Helvetica, Arial, Serif;
+	display: inline-block;
+	width: 35%;
+	font-size: 13px;
+	color: #777;
+	padding: 10px 1%;
+	border-left: solid 1px #CCC;
+	font-family: AvantGarde Bk BT, Helvetica, Arial, Serif;
 
 }
 

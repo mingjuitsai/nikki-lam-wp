@@ -33,19 +33,19 @@ $(document).ready(function(){
       var time_slow = 5000;
       var post_text_id= 0; 
       var post_image_id= 1;
+      
 
       function init_slideshow(){
         
-        var timer = setInterval(function(){slide_show()},time_slow);
+        var slideshow_timer;
+        slideshow_timer = setInterval(function(){slide_show();},time_slow);
 
         $("#content").click(function(){
+            clearInterval(slideshow_timer);
             slide_show();
+            slideshow_timer = setInterval(function(){slide_show();},time_slow);
         });
-        $("#content").hover(function(){
-            clearInterval(timer);},
-            function(){
-            timer=setInterval(function(){slide_show()},time_slow);
-        });
+
       }
       
       // putting Ajax fetched img into DOM 
@@ -61,7 +61,7 @@ $(document).ready(function(){
             .appendTo(".slideshow_images_jshook");
         }
 
-        $(".slideshow_images_jshook .artworks_block").addClass('loading')
+        $(".slideshow_images_jshook .artworks_block")
           // if there's iframe change to .children("img, iframe") or whatever post element is
           .children("img")
           .load(function(){
@@ -88,14 +88,14 @@ $(document).ready(function(){
         var opacity_in=1;
         
         /* animate and loop titles */
-        $(".des_title").animate({opacity:opacity_out},fade_out_speed,function(){
+        $(".des_title").dequeue().stop().animate({opacity:opacity_out},fade_out_speed,function(){
           $(".des_title").html(post_titles_obj[post_text_id]);
-          $(".des_title").animate({opacity:opacity_in},fade_in_speed);
+          $(".des_title").dequeue().stop().animate({opacity:opacity_in},fade_in_speed);
         });
         /* animate and loop contents */
-        $(".sub_des").animate({opacity:opacity_out},fade_out_speed,function(){
+        $(".sub_des").dequeue().stop().animate({opacity:opacity_out},fade_out_speed,function(){
           $(".sub_des").html(post_contents_obj[post_text_id]);
-          $(".sub_des").animate({opacity:opacity_in},fade_in_speed);
+          $(".sub_des").dequeue().stop().animate({opacity:opacity_in},fade_in_speed);
         });
         /* animate and loop img */   
         $(".slideshow_images_jshook .artworks_block:first").fadeOut(900).next('.artworks_block').fadeIn(500).end().appendTo(".slideshow_images_jshook");
