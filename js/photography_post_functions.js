@@ -22,8 +22,8 @@ $(document).ready(function(){
   console.log(container_width);
 
   $(".years li").click(function(){
-    $(this).siblings("li").css({'background':'none'});
-    $(this).addClass(".active");
+    $(this).siblings("li").removeClass('active');
+    $(this).addClass("active");
   });
   
   //set first element as requested item 
