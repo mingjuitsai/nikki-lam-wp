@@ -79,6 +79,29 @@ iframe{
 	margin-left:15px;
 }
 
+.site-url{
+	text-decoration: none;
+}
+
+.site-logo{}
+
+.site-logo h1{
+	margin: 0;
+	font-family: MinionProRegular;
+}
+
+.site-logo .nikki{
+	margin: 0;
+	color: rgb(178, 132, 62);
+	font-size: 2.4rem;
+	line-height: 2.4rem;
+}
+.site-logo .lam{
+	color: rgb(148, 103, 70);
+	font-size: 2.3rem;
+	line-height: 2.3rem;
+}
+
 img{
 	outline:none;
 	border:none;
@@ -272,6 +295,9 @@ for middle vertical alignment
 .photos div{
 	vertical-align:top;
 	display:inline-block;
+}
+.photos img{
+	min
 }
 
 #hover_block{
