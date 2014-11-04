@@ -15,11 +15,42 @@ function trim_title(html) {
 // get photo container dynamic width
 
 
+/*
+  Public Functions 
+*/
+
+/*  Scroll Slider Mouse functions fade-in out */
+var fade_timer;
+var fade_time = 6000;
+var photo_width;
+
+function scollbar_inactive() {
+  $(".scroll_bar_wrap").removeClass('active');
+}
+
+function scrollbar_mouseEvent() {
+
+   photo_width = $(".photos").innerWidth();
+
+    $("#content").mousemove(function(){
+      if($(".scroll_bar_wrap").hasClass('active')){
+        return;
+      } else if( photo_width > container_width){
+        $(".scroll_bar_wrap").addClass('active');
+        clearTimeout(fade_timer);
+        fade_timer = setTimeout(scollbar_inactive,fade_time);
+      } 
+    });
+
+    $("#content").mouseleave(function(){
+      scollbar_inactive();
+    });
+}
+
 
 $(document).ready(function(){
 
   container_width = $(".photo_container").width();
-  console.log(container_width);
 
   $(".years li").click(function(){
     $(this).siblings("li").removeClass('active');
@@ -27,56 +58,30 @@ $(document).ready(function(){
   });
   
   //set first element as requested item 
-  requested=$("#work_items li:first").attr('id');
+  requested=$(".work_items li:first").attr('id');
   
   // request item animate as selected, temp
   $("#"+requested).animate({opacity:0.6},100);
   
-  $("#work_items li").click(function(){
-    $(this).siblings("li").animate({opacity:1},100);
-    $(this).animate({opacity:0.6},100);
+  $(".work_items li").click(function(){
+    $(this).siblings("li").removeClass('active');
+    $(this).addClass("active");
   });
   
   //trim excessive titles here
-  $.each($("#work_items").find(".project_title"),function(){
+  $.each($(".work_items").find(".project_title"),function(){
           $(this).html(trim_title($(this).html()));
   });
   
   $(".photos").children("img, iframe").wrap($('<div>',{"class":"loading"})).load(function(){
     $(this).parent("div:first").removeClass('loading'); 
   });
+  
+  
+  // Activate mouseEvent
+  scrollbar_mouseEvent();
 
 
-
-  /*  slider functions  mouse enter fade in */
-  var fade_timer;
-  function onmousestop(){
-    $(".scroll_bar_wrap").dequeue().animate({opacity:0},500);
-  }
-  
-  $(".scroll_bar_wrap").animate({opacity:0},0);
-  
-  $("#content").mousemove(function(){
-
-      // if no scroll needed hide prev shown scroll bar and return do not show
-      if( $(".photos").innerWidth() <= container_width){
-        $(".scroll_bar_wrap").dequeue().animate({opacity:0},400);
-        return;
-      }
-      
-      $(".scroll_bar_wrap").dequeue().animate({opacity:1},400);
-      clearTimeout(fade_timer);
-      fade_timer=setTimeout(onmousestop,container_width);
-  });
-  
-  $("#content").mouseleave(function(){
-      // if no scroll needed do not operate
-      if( $(".photos").innerWidth() <=container_width){
-        return;
-      }
-      $(".scroll_bar_wrap").dequeue().animate({opacity:0},400);
-  });     
-  
   //get it out of way when click so have access to vimeo player 
   $("#hover_block").mousedown(function(){
     $(this).css({"pointer-events":"none"});
@@ -145,11 +150,11 @@ function year_to_post_titles(year,cat_name){
   };
   $.post(NikkiAjax.ajaxurl, data,function(response){
       //hide it first 
-      $("#work_items").animate({height:'hide',opacity:0},300,function(){
+      $(".work_items").animate({height:'hide',opacity:0},300,function(){
         // update html 
         $(this).html(response);
         // trim excessive title name
-        $.each($("#work_items").find(".project_title"),function(){
+        $.each($(".work_items").find(".project_title"),function(){
           $(this).html(trim_title($(this).html()));
         });
         // request item animate as selected, temp
@@ -159,7 +164,7 @@ function year_to_post_titles(year,cat_name){
       });
  
       // loading finished,  each time work_items renew, this will be called
-      $("#work_items li").click(function(){
+      $(".work_items li").click(function(){
         $(this).siblings("li").animate({opacity:1},100);
         $(this).animate({opacity:0.4},100);
       });
@@ -169,6 +174,8 @@ function year_to_post_titles(year,cat_name){
 
 //title to content, update description and images, via animation 
 function title_to_contents( post_id,cat_name ){
+
+    $(".photo_container").addClass("loading-fade");
 
     if (requested==post_id){
       return;
@@ -188,6 +195,8 @@ function title_to_contents( post_id,cat_name ){
     //must specify data type 'json'
     $.post(NikkiAjax.ajaxurl,data,function(response){
 
+      $(".photo_container").removeClass("loading-fade");
+
       //loading animation and html DOM change 
       $(".sub_des").animate({height:'hide',opacity:0},300,function(){
         var content_text=response.content_text;
@@ -201,18 +210,13 @@ function title_to_contents( post_id,cat_name ){
       var content_vimeo=response.content_vimeo;
       var content_cat=response.content_cat;
 
-      if(content_cat.indexOf('photography')!=-1){
-          $(".photos").html(content_img);
-      } else if (content_cat=='project') {
-          $(".photos").html(content_vimeo+content_img)
-          // add class to all the iframes
-          .find("iframe").addClass("vimeo");
-        }
-
-      // if content is not wider than container_widthpx hide previous shown scrollbar
-      if( $(".photos").innerWidth() <=container_width){
-        $(".scroll_bar_wrap").dequeue().animate({opacity:0},200);
-      }
+      
+      $(".photos").html(content_vimeo+content_img)
+      // add class to all the iframes
+      .find("iframe").addClass("vimeo");
+      
+      // Updating Photo Width in relation to Scroll bar Slider 
+      photo_width = $(".photos").innerWidth();
       
       $(".photos").children("img, iframe").wrap($('<div>',{"class":"loading"})).load(function(){
         $(this).parent("div:first").removeClass('loading'); 

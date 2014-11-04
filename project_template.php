@@ -97,10 +97,7 @@ does not work now cause its blocking acess to iframe
       ?>
       </ul>
 
-      <ul id="work_items">
-        <div class="recent_works">
-        Recent :
-        </div>
+      <ul class="work_items">
         <?php
         $max_loop=0;
         $month = array('','January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');

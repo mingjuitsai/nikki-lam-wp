@@ -14,11 +14,11 @@
         <?php
         $pages=wp_list_pages('title_li=');
         ?>
-        <li>
+        <!-- <li>
           <a href="http://thecuriousother.blogspot.com/">
           BLOG
           </a>
-        </li>
+        </li> -->
         <li id="nikki_fb">
           <a href="http://www.facebook.com/nikkilam.art">
           FB
