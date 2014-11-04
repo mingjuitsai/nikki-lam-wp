@@ -189,12 +189,12 @@ function title_to_contents( post_id,cat_name ){
     $.post(NikkiAjax.ajaxurl,data,function(response){
 
       //loading animation and html DOM change 
-      $("#sub_des").animate({height:'hide',opacity:0},300,function(){
+      $(".sub_des").animate({height:'hide',opacity:0},300,function(){
         var content_text=response.content_text;
         var content_title=response.content_title;
         $(".sub_des_title").html(content_title);
         $(".sub_des_text").html(content_text);
-        $("#sub_des").animate({height:'show',opacity:1},300);
+        $(".sub_des").animate({height:'show',opacity:1},300);
       });
 
       var content_img=response.content_image;

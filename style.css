@@ -133,25 +133,53 @@ a{
 #nav{
 	overflow:visible;
 	position:relative;
-	font-size:15px;
+	margin:.2rem 0px 0px 0px;
 	font-family:AvantGarde Bk BT, Helvetica, Arial, Serif;
-	color:#960;
-	width:1200px;
-	vertical-align:middle;
-	padding:0;
-	margin:1px 0px 0px 0px;
+	height: 68px;
+	min-height: 68px;
+}
+#nav:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.25em; /* Adjusts for spacing */
 }
 
-#nav li{
+#nav .children{
+	max-width: 0;
+	-webkit-transition: all 600ms cubic-bezier(0.550, 0.055, 0.675, 0.190); 
+   -moz-transition: all 600ms cubic-bezier(0.550, 0.055, 0.675, 0.190); 
+     -o-transition: all 600ms cubic-bezier(0.550, 0.055, 0.675, 0.190); 
+        transition: all 600ms cubic-bezier(0.550, 0.055, 0.675, 0.190); /* easeInCubic */
+}
+
+#nav .children.active{
+	max-width: 4000px;
+}
+
+#nav > li{
 	overflow:hidden;
 	position:relative;
 	/* the line-height might extend ouf of the nav
 	if the nav line-height isn't high enough */
-	line-height:17px;
+	font-size:15px;
+	line-height:normal;
 	display:inline;
 	vertical-align:middle;
 }
-#nav li a{
+
+.current_page_ancestor a {
+	opacity: .5;
+} 
+
+.current_page_item a {
+	opacity: .9;
+}
+
+#nav > li > a{
+	display: inline-block;
+	vertical-align: middle;
 }
 
 #nav li a:link, a:visited{
@@ -181,7 +209,6 @@ for middle vertical alignment
 	padding-left:5px;
 	position:relative;
 	margin:0;
-	line-height:15px;
 	vertical-align:middle;
 	display:inline-block;
 }
@@ -190,6 +217,7 @@ for middle vertical alignment
 	overflow:hidden;
 	position:relative;
 	display:block;
+	line-height: 17px;
 }
 
 
@@ -229,6 +257,7 @@ for middle vertical alignment
 	margin:auto;
 	position:relative;
 	cursor:pointer;
+	margin-top: 1rem;
 }
 
 .images_container{
@@ -277,7 +306,7 @@ for middle vertical alignment
 	-webkit-border-radius:2px;
 	-khtml-border-radius:2px;
 	border-radius:2px;
-	width:.6rem;
+	width:.55rem;
 	/* Fallback for web browsers that doesn't support RGBa */
 	background-color: rgb(136, 136, 136) transparent;
 	/* RGBa with 0.6 opacity */
@@ -471,12 +500,6 @@ for middle vertical alignment
 	Exhibition
 ------------------------------*/
 
-#ex_box{
-	margin-top:35px;
-	padding-bottom:20px;
-}
-
-
 #exhibition_period{
 	color:#999;
 	font-size:13px;
@@ -494,14 +517,12 @@ for middle vertical alignment
 /* single exhibition */
 
 .single_exhibition{
-	color:#C90;
-	position:relative;
-	clear:both;
-	height:auto;
-	width:100%;
-	display:inline-block;
-
-	/*border:solid 1px black;*/
+	position: relative;
+	clear: both;
+	height: auto;
+	width: 100%;
+	overflow: hidden;
+	margin-bottom: 3.2rem;
 }
 
 .single_exhibition a:link,.single_exhibition a:visited{
@@ -535,65 +556,74 @@ for middle vertical alignment
 	padding: 0 1.5%;
 }
 
-.exhibition_title{
-	color:#960;
-	clear:both;
-	font-size:18px;
+.ex_info_row {
+	overflow: hidden;
 }
 
+.exhibition_sec .exhibition_title, 
+.exhibition_sec .ex_info_title,
+.exhibition_sec .ex_info_value {
+	margin: 0;
+	font-weight: normal;
+}
 
-
-
-
-
+.exhibition_title{
+	color: #866539;
+	clear: both;
+	font-size: 1.3rem;
+	line-height: normal;
+	padding:.6rem 0 .7rem;
+}
+.ex_info_title, .ex_info_value{
+	padding: 0.1rem 0;
+}
 .ex_info_title{
-	display:inline-block;
-	color:#ADADAD;
-	font-size:14px;
+	float: left;
+	clear:left;
+	width: 50%;
+	color: #996623;
+	font-size: 14px;
 }
 .ex_info_value{
-	width:230px;
-	float:right;
-	margin-right:90px;
-	color:#AB8473;
+	float: right;
+	clear: right;
+	width: 50%;
+	color: #867150;
+	font-size: 14px;
 }
 
-.sponsor_logos{
-	font-size:10px;
-	vertical-align:middle;
-	position:relative;
-	float:right;
-	overflow:visible;
-	margin:30px 0px 10px 0px;
-	color:#614B44;
-	display:inline-block;
+.exhibition_des{
+	clear: both;
+	overflow: hidden;
+	margin-top:1rem;
+	color: rgb(152, 139, 121);
 }
-.sponsor_logos img{
+
+.contributor_logos{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+.contributor_logos img{
 	margin-left:5px;
 	vertical-align:middle;
 	width:40px;
 	height:auto;
+	display: none;
 }
 
-.fund_logos{
+.sponsor_logos, .fund_logos{
 	font-size:10px;
-	vertical-align:middle;
-	position:relative;
-	float:right;
-	overflow:hidden;
-	margin:40px 20px 30px 0px;
 	color:#614B44;
 	display:inline-block;
+	vertical-align: middle;
+	margin-left: .5rem;
 }
-.fund_logos img{
-	border:solid 1px #FFF;
-	border-radius:5px;
-	-moz-border-radius:5px;	
-	-webkit-border-radius:5px;
-	margin-left:5px;
-	vertical-align:middle;
-	width:40px;
-	height:auto;
+
+.sponsor_logos img[alt="sponsor"],
+.fund_logos img[alt="funding"] {
+	display: inline-block;
 }
 
 /* 
