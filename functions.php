@@ -28,7 +28,7 @@ function nikki_lam_scripts() {
   // ajax attach 
   wp_localize_script( 'nikki-lam-projectJS', 'NikkiAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
   wp_localize_script( 'nikki-lam-siteJs', 'NikkiAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
-  
+
 }
 // add all styles and custom script style
 add_action( 'wp_enqueue_scripts', 'nikki_lam_scripts' );
@@ -158,7 +158,7 @@ function title_to_contents_callback(){
       $content_title=$var_content->title;
       $content_image=implode(" ",$result[0]);
       $content_vimeo=implode(" ",$iframe_result[0]);
-      $content_text=preg_replace('/\s\s+/', ' ', trim(strip_tags($var_content->content)));
+      $content_text=preg_replace("/&#?[a-z0-9]+;/i", "" , trim(strip_tags($var_content->content)));
       echo json_encode(array(
                         "content_title"=>$content_title,
                       "content"=>$content,

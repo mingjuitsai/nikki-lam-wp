@@ -11,8 +11,10 @@
     <?php wp_title( '|', true, 'right' ); ?>
   </title>
   <?php
-  // declare what category you wanna get here
-  $cat_name= "project"; 
+  // use page slug as cat slug 
+  global $post;
+  $page_slug = $post->post_name;
+  $cat_name= $page_slug;
   ?>
 </head>
 
@@ -133,8 +135,8 @@ does not work now cause its blocking acess to iframe
 
       foreach($recents as $recent) {
         if(in_category($cat_name,$recent->post_id)){
-        echo "<div class='sub_des_title'>".$recent->title."</div>"; 
-        echo "<div class='sub_des_text'>".trim(strip_tags($recent->content),'<&nbsp>')."</div>"; 
+        echo "<h5 class='sub_des_title'>".$recent->title."</h5>"; 
+        echo "<h6 class='sub_des_text'>".preg_replace("/&#?[a-z0-9]+;/i", "" , trim(strip_tags($recent->content)))."</h6>"; 
         $max_loop++;
         if($max_loop==1){break;}
         }

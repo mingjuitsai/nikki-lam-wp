@@ -10,7 +10,7 @@
     </a>
 
     <div id="nav_container">
-      <nav id="nav">
+      <nav class="nav">
         <?php
         $pages=wp_list_pages('title_li=');
         ?>
